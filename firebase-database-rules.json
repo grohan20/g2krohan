@@ -1,0 +1,41 @@
+{
+  "rules": {
+    ".read": true,
+    ".write": true,
+    "reviews": {
+      ".read": true,
+      ".write": true
+    },
+    "brokers": {
+      ".read": true,
+      ".write": true
+    },
+    "activation_keys": {
+      ".read": true,
+      ".write": true
+    },
+    "key_usage": {
+      ".read": true,
+      ".write": true
+    },
+    "activated_users": {
+      ".read": true,
+      ".write": true,
+      "$userId": {
+        ".validate": "newData.hasChildren(['name', 'activationCode', 'activatedAt'])",
+        "name": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        },
+        "activationCode": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        },
+        "activatedAt": {
+          ".validate": "newData.isNumber()"
+        },
+        "isBanned": {
+          ".validate": "newData.isBoolean()"
+        }
+      }
+    }
+  }
+}
